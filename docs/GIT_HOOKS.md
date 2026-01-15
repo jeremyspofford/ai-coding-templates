@@ -34,6 +34,7 @@ The `--git` flag initializes git, but hooks aren't set up yet.
 ```
 
 This creates:
+
 - `.git/hooks/pre-commit` - Runs linting checks
 - `.git/hooks/prepare-commit-msg` - (Optional) Message preparation
 - `.markdownlint.json` - Linting configuration
@@ -81,26 +82,30 @@ git commit -m "Fix markdown"
 ### MD040 - Fenced Code Language
 
 **What it checks**:
+
 - Every code block must have a language tag
 - `\`\`\`javascript` ✅ (good)
 - `\`\`\`` ❌ (fails)
 
 **Common tags**:
-```
-bash, sh - Shell scripts
-javascript, js - JavaScript
-typescript, ts - TypeScript
-python, py - Python
-json - JSON
-yaml, yml - YAML
-sql - SQL
-html, css - Web
-markdown, md - Markdown (default if unsure)
-```
+
+| Language | Tags |
+| -------- | ---- |
+| Shell scripts | `bash`, `sh` |
+| JavaScript | `javascript`, `js` |
+| TypeScript | `typescript`, `ts` |
+| Python | `python`, `py` |
+| JSON | `json` |
+| YAML | `yaml`, `yml` |
+| SQL | `sql` |
+| Web | `html`, `css` |
+| Markdown | `markdown`, `md` |
+| Default (unsure) | `markdown` |
 
 ### MD060 - Table Formatting
 
 **What it checks**:
+
 - Table separators need proper spacing
 - `| ------- | ------- |` ✅ (good)
 - `|--------|--------|` ❌ (fails)
@@ -108,6 +113,7 @@ markdown, md - Markdown (default if unsure)
 ### Code Linting (Optional)
 
 If your project has a `package.json` with a `lint` script:
+
 - TypeScript/JavaScript files are checked
 - Must pass linting before commit
 
@@ -120,13 +126,21 @@ If your project has a `package.json` with a `lint` script:
 The pre-commit hook works with basic regex checks, no dependencies needed.
 
 **Pros**:
+
 - No installation required
 - Works on any machine
 - Fast
+- Informational warnings for potential issues
 
 **Cons**:
-- Basic checks only
-- Less accurate detection
+
+- Regex checks are limited
+- May not catch all issues
+- Informational only (won't block commits)
+
+**Recommendation**:
+Install markdownlint for production-quality enforcement. Basic checks work well
+for development.
 
 ### With markdownlint (Recommended)
 
@@ -144,6 +158,7 @@ brew install markdownlint-cli
 ```
 
 **After installation**:
+
 ```bash
 # Verify it works
 markdownlint --version
@@ -180,6 +195,7 @@ Created automatically by `setup-git-hooks.sh`. Configures markdown linting rules
 ```
 
 **Key settings**:
+
 - `MD040`: List of allowed language tags
 - `MD013`: Disabled (line length)
 - `MD033`: Disabled (inline HTML)
@@ -187,6 +203,7 @@ Created automatically by `setup-git-hooks.sh`. Configures markdown linting rules
 ### `.git/hooks/pre-commit`
 
 Bash script that runs before each commit. You can:
+
 - Edit directly to customize checks
 - Add new linting rules
 - Add project-specific validation
@@ -219,6 +236,7 @@ markdownlint --fix docs/README.md
 ```
 
 **What gets fixed automatically**:
+
 - Missing language tags → adds `markdown` default
 - Table spacing → normalizes format
 - Line endings → standardizes
@@ -231,7 +249,9 @@ In markdown file, use comments:
 ```markdown
 <!-- markdownlint-disable MD040 -->
 ```
+
 code without language tag
+
 ```
 <!-- markdownlint-enable MD040 -->
 ```
@@ -255,12 +275,14 @@ fi
 ### Hooks Not Running
 
 **Check if hooks are executable**:
+
 ```bash
 ls -la .git/hooks/
 # Should show: -rwxr-xr-x (with x permission)
 ```
 
 **Make them executable**:
+
 ```bash
 chmod +x .git/hooks/pre-commit
 chmod +x .git/hooks/prepare-commit-msg
@@ -269,11 +291,13 @@ chmod +x .git/hooks/prepare-commit-msg
 ### "markdownlint not found"
 
 Install markdownlint:
+
 ```bash
 npm install -g markdownlint-cli
 ```
 
 Or run hooks without it:
+
 ```bash
 ./scripts/setup-git-hooks.sh
 # Hooks will use fallback basic checks
@@ -282,6 +306,7 @@ Or run hooks without it:
 ### False Positive Errors
 
 **Check configuration**:
+
 ```bash
 # View current config
 cat .markdownlint.json
@@ -297,6 +322,7 @@ markdownlint -v file.md
 **Check the error message** - it should explain what's wrong.
 
 **Quick fixes**:
+
 ```bash
 # For markdown issues
 markdownlint --fix *.md
@@ -421,6 +447,7 @@ fi
 ### 1. Install Early
 
 Run setup immediately after creating a project:
+
 ```bash
 ./scripts/setup-project.sh --name project --tools claude --git
 cd project
@@ -430,6 +457,7 @@ cd project
 ### 2. Commit Hook Files
 
 Add hook configuration to version control:
+
 ```bash
 git add .markdownlint.json
 git commit -m "Add linting configuration"
@@ -438,6 +466,7 @@ git commit -m "Add linting configuration"
 ### 3. Document Exceptions
 
 If you disable rules, document why:
+
 ```markdown
 <!-- markdownlint-disable MD033 -->
 <!-- Reason: Inline HTML needed for custom styling -->
@@ -448,6 +477,7 @@ If you disable rules, document why:
 ### 4. Team Consistency
 
 Ensure all team members have the same configuration:
+
 ```bash
 # In project README
 ./scripts/setup-git-hooks.sh
@@ -456,6 +486,7 @@ Ensure all team members have the same configuration:
 ### 5. Regular Updates
 
 Update linting rules as project evolves:
+
 ```bash
 # After updating .markdownlint.json
 ./scripts/setup-git-hooks.sh
