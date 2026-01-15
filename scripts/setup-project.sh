@@ -203,7 +203,7 @@ create_project() {
 
   # Copy shared files
   print_info "Adding shared configuration..."
-  cp "$SCRIPT_DIR/shared/.gitignore" "$project_path/"
+  cp "$SCRIPT_DIR/.gitignore" "$project_path/"
 
   # Process each tool
   IFS=',' read -ra TOOL_ARRAY <<< "$TOOLS"
@@ -326,10 +326,18 @@ print_summary() {
 
   echo -e "${YELLOW}Next Steps:${NC}"
   echo "  1. cd $project_path"
-  echo "  2. Edit .claude/instructions.md (Claude users)"
-  echo "  3. Customize .claude/config.json to add plugins"
-  echo "  4. Review and edit tool-specific rules"
-  echo "  5. git add . && git commit -m 'Customize AI settings'"
+  echo "  2. ./scripts/setup-git-hooks.sh (set up linting hooks)"
+  echo "  3. Edit .claude/instructions.md (Claude users)"
+  echo "  4. Customize .claude/config.json to add plugins"
+  echo "  5. Review and edit tool-specific rules"
+  echo "  6. git add . && git commit -m 'Customize AI settings'"
+  echo ""
+
+  echo -e "${YELLOW}Git Hooks:${NC}"
+  echo "  Run: ./scripts/setup-git-hooks.sh"
+  echo "  • Enforces markdown linting (MD040, MD060)"
+  echo "  • Validates code quality before commit"
+  echo "  • See docs/GIT_HOOKS.md for details"
   echo ""
 
   echo -e "${YELLOW}Quick Reference:${NC}"
