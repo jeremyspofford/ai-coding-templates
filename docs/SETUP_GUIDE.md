@@ -35,7 +35,50 @@ Edit `.claude/config.json`:
 - `enabledPlugins` - Which plugins Claude can use
 - `customInstructions` - Points to `instructions.md`
 
-### 3. Add Project Guidelines
+### 3. Configure MCP Servers (Optional)
+
+Copy MCP server configuration to your project root:
+
+```bash
+cp ~/workspace/ai-coding-templates/claude/project-config/.mcp.json MY_PROJECT/
+```
+
+The default configuration includes Playwright for browser automation:
+
+```json
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp@latest"]
+    }
+  }
+}
+```
+
+**Available Browser Tools (after restart):**
+
+- `browser_navigate` - Navigate to URLs
+- `browser_snapshot` - Get accessibility tree
+- `browser_click` - Click elements
+- `browser_type` - Type into inputs
+- `browser_console_messages` - Check for errors
+- `browser_network_requests` - Verify API calls
+
+**Headless Mode (for CI/automation):**
+
+```json
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp@latest", "--headless"]
+    }
+  }
+}
+```
+
+### 4. Add Project Guidelines
 
 Edit `.claude/instructions.md`:
 
@@ -63,7 +106,7 @@ npm run build
 [Your team info]
 ```
 
-### 4. Review Standards
+### 5. Review Standards
 
 Check these files for project standards:
 
@@ -71,7 +114,7 @@ Check these files for project standards:
 - `.claude/rules/coding-practices.md` - TypeScript standards
 - `.claude/rules/tdd-workflow.md` - Testing process (Ralph Loop)
 
-### 5. Restart Claude
+### 6. Restart Claude
 
 Close and reopen Claude Code to load new configuration.
 
@@ -102,7 +145,29 @@ Check `.cursor/rules/`:
 - `tdd-workflow.mdc` - Testing process
 - `repo-overview.mdc` - Repository structure
 
-### 3. Customize Rules
+### 3. Configure MCP Servers (Optional)
+
+The template includes `.cursor/mcp.json` with Playwright for browser automation:
+
+```json
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp@latest"]
+    }
+  }
+}
+```
+
+**Available Browser Tools (after restart):**
+
+- `browser_navigate` - Navigate to URLs
+- `browser_snapshot` - Get accessibility tree
+- `browser_click` - Click elements
+- `browser_type` - Type into inputs
+
+### 4. Customize Rules
 
 Edit `.cursor/rules/*.mdc` files:
 
@@ -116,7 +181,7 @@ Rules use `.mdc` format (Cursor's markdown extension):
 - Point 3
 ```
 
-### 4. Add Custom Commands
+### 5. Add Custom Commands
 
 Create new commands in `.cursor/commands/`:
 
@@ -128,7 +193,7 @@ Create new commands in `.cursor/commands/`:
 [Implementation details]
 ```
 
-### 5. Restart Cursor
+### 6. Restart Cursor
 
 Close and reopen Cursor to load new configuration.
 
@@ -198,18 +263,68 @@ This is a **reference only** for structure and best practices.
 
 ---
 
-## Multi-Tool Setup
+## Gemini Code Assist Setup
 
-Use all three tools in the same project:
+### 1. Initial Setup
+
+Copy Gemini template to your project:
 
 ```bash
+cp -r ~/workspace/ai-coding-templates/gemini/project-config/.gemini MY_PROJECT/
+```
+
+### 2. Configure MCP Servers
+
+The template includes `.gemini/settings.json` with Playwright for browser automation:
+
+```json
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp@latest"]
+    }
+  }
+}
+```
+
+**Available Browser Tools (after restart):**
+
+- `browser_navigate` - Navigate to URLs
+- `browser_snapshot` - Get accessibility tree
+- `browser_click` - Click elements
+- `browser_type` - Type into inputs
+
+### 3. Restart IDE
+
+Close and reopen VS Code/IDE to load new configuration.
+
+### Gemini Notes
+
+- Gemini Code Assist agent mode is powered by Gemini CLI
+- MCP servers must be added via `.gemini/settings.json` (not command palette)
+- See [Google's MCP documentation](https://developers.google.com/gemini-code-assist/docs/use-agentic-chat-pair-programmer) for details
+
+---
+
+## Multi-Tool Setup
+
+Use all four tools in the same project:
+
+```bash
+# Copy tool-specific configs
 cp -r ai-coding-templates/claude/project-config/.claude MY_PROJECT/
 cp -r ai-coding-templates/cursor/project-config/.cursor MY_PROJECT/
 cp -r ai-coding-templates/antigravity/project-config/.agent MY_PROJECT/
+cp -r ai-coding-templates/gemini/project-config/.gemini MY_PROJECT/
+
+# Copy MCP configs (Claude uses root-level .mcp.json)
+cp ai-coding-templates/claude/project-config/.mcp.json MY_PROJECT/
 ```
 
 Now you have consistent:
 - **Rules** - Same coding standards across all tools
+- **MCP Servers** - Same browser automation tools (Playwright)
 - **Workflows** - Consistent automation
 - **Commands** - Same development experience
 

@@ -65,7 +65,7 @@ ${YELLOW}Usage:${NC}
 ${YELLOW}Options:${NC}
   --name PROJECT_NAME        Project name (required)
   --tools TOOLS              Tools to setup (comma-separated or 'all')
-                             Options: claude,cursor,antigravity,all
+                             Options: claude,cursor,antigravity,gemini,all
   --path PATH                Directory to create project in (default: current)
   --git                      Initialize git repository
   --help                     Show this help message
@@ -136,20 +136,16 @@ interactive_mode() {
     echo "  1) Claude only"
     echo "  2) Cursor only"
     echo "  3) Antigravity only"
-    echo "  4) Claude + Cursor"
-    echo "  5) Claude + Antigravity"
-    echo "  6) Cursor + Antigravity"
-    echo "  7) All (Claude + Cursor + Antigravity)"
-    read -p "Choice [1-7]: " choice
+    echo "  4) Gemini only"
+    echo "  5) All (Claude + Cursor + Antigravity + Gemini)"
+    read -p "Choice [1-5]: " choice
 
     case $choice in
       1) TOOLS="claude" ;;
       2) TOOLS="cursor" ;;
       3) TOOLS="antigravity" ;;
-      4) TOOLS="claude,cursor" ;;
-      5) TOOLS="claude,antigravity" ;;
-      6) TOOLS="cursor,antigravity" ;;
-      7) TOOLS="all" ;;
+      4) TOOLS="gemini" ;;
+      5) TOOLS="all" ;;
       *) print_error "Invalid choice" ;;
     esac
   done
@@ -179,14 +175,14 @@ validate_inputs() {
 
   # Expand "all" to all tools
   if [[ "$TOOLS" == "all" ]]; then
-    TOOLS="claude,cursor,antigravity"
+    TOOLS="claude,cursor,antigravity,gemini"
   fi
 
   # Validate tool names
   IFS=',' read -ra TOOL_ARRAY <<< "$TOOLS"
   for tool in "${TOOL_ARRAY[@]}"; do
     tool=$(echo "$tool" | xargs) # trim whitespace
-    if [[ ! "$tool" =~ ^(claude|cursor|antigravity)$ ]]; then
+    if [[ ! "$tool" =~ ^(claude|cursor|antigravity|gemini)$ ]]; then
       print_error "Invalid tool: $tool"
       exit 1
     fi
@@ -217,17 +213,17 @@ create_project() {
     case $tool in
       claude)
         print_info "Adding Claude configuration..."
-        cp -r "$SCRIPT_DIR/claude/project-config/.claude" "$project_path/"
+        cp -r "$SCRIPT_DIR/.claude" "$project_path/"
         print_success "Added .claude/"
         ;;
       cursor)
         print_info "Adding Cursor configuration..."
-        cp -r "$SCRIPT_DIR/cursor/project-config/.cursor" "$project_path/"
+        cp -r "$SCRIPT_DIR/.cursor" "$project_path/"
         print_success "Added .cursor/"
         ;;
       antigravity)
         print_info "Adding Antigravity configuration..."
-        cp -r "$SCRIPT_DIR/antigravity/project-config/.agent" "$project_path/"
+        cp -r "$SCRIPT_DIR/.agent" "$project_path/"
         print_success "Added .agent/"
         ;;
     esac

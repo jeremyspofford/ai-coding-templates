@@ -37,29 +37,34 @@ git commit -m "Initial commit with AI coding templates"
 ### Option 3: Copy into Existing Project
 
 ```bash
-cp -r ai-coding-templates/claude/project-config/.claude MY_PROJECT/
-cp -r ai-coding-templates/cursor/project-config/.cursor MY_PROJECT/
-cp -r ai-coding-templates/antigravity/project-config/.agent MY_PROJECT/
+cp -r ai-coding-templates/.claude MY_PROJECT/
+cp -r ai-coding-templates/.cursor MY_PROJECT/
+cp -r ai-coding-templates/.agent MY_PROJECT/
 ```
 
 ## Repository Structure
 
 ```
 ai-coding-templates/
-├── claude/                   # Claude Code templates
-│   ├── global-config/        # Reference global config
-│   └── project-config/       # Copy to projects → .claude/
-├── cursor/                   # Cursor templates
-│   ├── global-config/        # Reference global config
-│   └── project-config/       # Copy to projects → .cursor/
-├── antigravity/              # Antigravity templates
-│   ├── global-config/        # Reference global config
-│   └── project-config/       # Copy to projects → .agent/
-├── shared/                   # Shared across all tools
+├── .claude/          # Claude Code templates
+│   ├── config.json   # Plugin configuration
+│   ├── CLAUDE.md     # Project guidelines template
+│   ├── settings.local.json  # Permissions
+│   ├── rules/        # Coding standards rules
+│   └── skills/       # Available skills (n8n)
+├── .cursor/          # Cursor templates
+│   ├── rules/        # Coding standards rules
+│   └── commands/     # Custom commands
+├── .agent/           # Antigravity templates
+│   ├── rules/        # Coding standards rules
+│   └── workflows/    # Automated workflows
+├── shared/           # Shared across all tools
 │   ├── .gitignore
-│   └── rules/                # Multi-format rules
-├── docs/                     # Documentation
-├── scripts/                  # setup-project.sh automation
+│   └── rules/        # Multi-format rules (source of truth)
+├── docs/             # Documentation
+├── scripts/          # Automation scripts
+│   ├── setup-project.sh     # Create new projects
+│   └── sync-shared-rules.sh # Sync shared rules
 └── README.md
 ```
 
