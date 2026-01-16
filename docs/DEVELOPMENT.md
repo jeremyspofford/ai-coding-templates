@@ -4,7 +4,7 @@
 
 This repository contains templates for three AI coding assistants:
 
-```
+```text
 ai-coding-templates/
 ├── .claude/          # Claude Code templates
 │   ├── config.json   # Plugins
@@ -27,12 +27,15 @@ ai-coding-templates/
    - Keep content semantically equivalent across formats
 
 2. **Sync to tool directories**
+
    ```bash
    ./scripts/sync-shared-rules.sh
    ```
+
    This copies shared rules to all three tool directories
 
 3. **Verify changes**
+
    ```bash
    # Check that files were copied
    ls -la .claude/rules/
@@ -41,6 +44,7 @@ ai-coding-templates/
    ```
 
 4. **Test with setup script**
+
    ```bash
    ./scripts/setup-project.sh --name test-project --tools all
    cd test-project
@@ -50,6 +54,7 @@ ai-coding-templates/
    ```
 
 5. **Commit changes**
+
    ```bash
    git add shared/rules/ .claude/rules/ .cursor/rules/ .agent/rules/
    git commit -m "Update shared rules"
@@ -60,17 +65,20 @@ ai-coding-templates/
 ### Adding a New Shared Rule
 
 1. Create both format versions:
+
    ```bash
    vim shared/rules/my-new-rule.md
    vim shared/rules/my-new-rule.mdc
    ```
 
 2. Sync to all tools:
+
    ```bash
    ./scripts/sync-shared-rules.sh
    ```
 
 3. Test and commit:
+
    ```bash
    ./scripts/setup-project.sh --name test --tools all
    cd test && ls -la .claude/rules/ && cd ..

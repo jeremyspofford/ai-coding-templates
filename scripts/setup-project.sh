@@ -205,6 +205,20 @@ create_project() {
   print_info "Adding shared configuration..."
   cp "$SCRIPT_DIR/.gitignore" "$project_path/"
 
+  # Copy scripts directory
+  if [[ -d "$SCRIPT_DIR/scripts" ]]; then
+    print_info "Adding scripts..."
+    cp -r "$SCRIPT_DIR/scripts" "$project_path/"
+    print_success "Added scripts/"
+  fi
+
+  # Copy docs directory
+  if [[ -d "$SCRIPT_DIR/docs" ]]; then
+    print_info "Adding documentation..."
+    cp -r "$SCRIPT_DIR/docs" "$project_path/"
+    print_success "Added docs/"
+  fi
+
   # Process each tool
   IFS=',' read -ra TOOL_ARRAY <<< "$TOOLS"
   for tool in "${TOOL_ARRAY[@]}"; do
@@ -238,6 +252,11 @@ create_readme() {
 # Project Setup
 
 This project was created using [ai-coding-templates](https://github.com/your-org/ai-coding-templates).
+
+## Project Structure
+
+- `scripts/` - Setup and utility scripts
+- `docs/` - Project documentation
 
 ## AI Coding Assistant Setup
 
@@ -371,6 +390,7 @@ print_summary() {
   echo ""
 
   echo -e "${YELLOW}Quick Reference:${NC}"
+  echo "  Shared: scripts/ | docs/"
   if [[ "$TOOLS" == *"claude"* ]]; then
     echo "  Claude: .claude/config.json (plugins) | .claude/rules/ (standards)"
   fi

@@ -4,7 +4,7 @@ Detailed setup instructions for each AI coding assistant.
 
 ## Claude Code Setup
 
-### 1. Initial Setup
+### Claude Initial Setup
 
 Copy Claude template to your project:
 
@@ -32,6 +32,7 @@ Edit `.claude/config.json`:
 ```
 
 **Key Fields:**
+
 - `enabledPlugins` - Which plugins Claude can use
 - `customInstructions` - Points to `instructions.md`
 
@@ -103,6 +104,8 @@ npm run build
 ```
 
 ## Key Contacts
+
+```text
 [Your team info]
 ```
 
@@ -128,7 +131,7 @@ This is a **reference only**. Customize your `~/.claude/settings.json` as needed
 
 ## Cursor Setup
 
-### 1. Initial Setup
+### Cursor Initial Setup
 
 Copy Cursor template to your project:
 
@@ -136,7 +139,7 @@ Copy Cursor template to your project:
 cp -r ~/workspace/ai-coding-templates/cursor/project-config/.cursor MY_PROJECT/
 ```
 
-### 2. Review Rules
+### Cursor Review Rules
 
 Check `.cursor/rules/`:
 
@@ -145,7 +148,7 @@ Check `.cursor/rules/`:
 - `tdd-workflow.mdc` - Testing process
 - `repo-overview.mdc` - Repository structure
 
-### 3. Configure MCP Servers (Optional)
+### Cursor Configure MCP Servers (Optional)
 
 The template includes `.cursor/mcp.json` with Playwright for browser automation:
 
@@ -207,7 +210,7 @@ This is a **reference only** for structure and best practices.
 
 ## Antigravity Setup
 
-### 1. Initial Setup
+### Antigravity Initial Setup
 
 Copy Antigravity template to your project:
 
@@ -215,7 +218,7 @@ Copy Antigravity template to your project:
 cp -r ~/workspace/ai-coding-templates/antigravity/project-config/.agent MY_PROJECT/
 ```
 
-### 2. Review Rules
+### Antigravity Review Rules
 
 Check `.agent/rules/`:
 
@@ -265,7 +268,7 @@ This is a **reference only** for structure and best practices.
 
 ## Gemini Code Assist Setup
 
-### 1. Initial Setup
+### Gemini Initial Setup
 
 Copy Gemini template to your project:
 
@@ -323,6 +326,7 @@ cp ai-coding-templates/claude/project-config/.mcp.json MY_PROJECT/
 ```
 
 Now you have consistent:
+
 - **Rules** - Same coding standards across all tools
 - **MCP Servers** - Same browser automation tools (Playwright)
 - **Workflows** - Consistent automation
@@ -337,6 +341,7 @@ When updating rules:
 3. Commit changes to version control
 
 Examples:
+
 - `shared/rules/markdown-linting.md` - Claude format
 - `shared/rules/markdown-linting.mdc` - Cursor format
 
@@ -349,6 +354,7 @@ Examples:
 Reference: `claude/global-config/settings.json`
 
 This shows a minimal global config with 7 essential plugins:
+
 - github
 - code-review
 - commit-commands
@@ -378,6 +384,7 @@ Antigravity stores global settings in `~/.agent/`. Review the reference for stru
 ### Claude can't find customInstructions
 
 Check `.claude/config.json`:
+
 ```json
 {
   "customInstructions": "file://./instructions.md"
@@ -389,6 +396,7 @@ Path must be relative to `.claude/` directory.
 ### Cursor rules not showing up
 
 Make sure `.cursor/rules/` files end in `.mdc`:
+
 ```bash
 # These work:
 .cursor/rules/my-rule.mdc
@@ -402,6 +410,7 @@ Make sure `.cursor/rules/` files end in `.mdc`:
 ### Antigravity workflows not triggering
 
 Check `.agent/workflows/` files:
+
 1. Ensure YAML/markdown format is correct
 2. Check workflow trigger conditions
 3. Verify file names match workflow references

@@ -7,6 +7,7 @@
     "explanatory-output-style@claude-plugins-official": true,
     "learning-output-style@claude-plugins-official": true,
     "hookify@claude-plugins-official": true,
+    "ralph-wiggum@claude-plugins-official": true,
     "n8n-node-configuration": true,
     "n8n-code-javascript": true,
     "n8n-code-python": true,

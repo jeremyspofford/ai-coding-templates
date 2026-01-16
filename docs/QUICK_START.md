@@ -13,6 +13,7 @@ cd my-awesome-project
 ```
 
 That's it. You now have:
+
 - `.claude/` - Claude Code configuration
 - `.cursor/` - Cursor configuration
 - `.agent/` - Antigravity configuration
@@ -56,7 +57,8 @@ cp -r ~/workspace/ai-coding-templates/antigravity/project-config/.agent ./MY_PRO
 ## What You Get
 
 ### Claude Code (.claude/)
-```
+
+```text
 .claude/
 ├── config.json              # Plugins configuration
 ├── instructions.md          # Project guidelines
@@ -69,12 +71,14 @@ cp -r ~/workspace/ai-coding-templates/antigravity/project-config/.agent ./MY_PRO
 ```
 
 **First Steps:**
+
 1. Edit `config.json` to add project-specific plugins
 2. Edit `instructions.md` with your project details
 3. Review rules in `rules/` directory
 
 ### Cursor (.cursor/)
-```
+
+```text
 .cursor/
 ├── rules/
 │   ├── markdown-linting.mdc
@@ -87,11 +91,13 @@ cp -r ~/workspace/ai-coding-templates/antigravity/project-config/.agent ./MY_PRO
 ```
 
 **First Steps:**
+
 1. Review rules in `rules/`
 2. Customize commands in `commands/`
 
 ### Antigravity (.agent/)
-```
+
+```text
 .agent/
 ├── rules/
 │   ├── markdown-linting.md
@@ -105,6 +111,7 @@ cp -r ~/workspace/ai-coding-templates/antigravity/project-config/.agent ./MY_PRO
 ```
 
 **First Steps:**
+
 1. Review workflows in `workflows/`
 2. Customize rules in `rules/`
 
@@ -173,18 +180,21 @@ Description...
 
 ## Troubleshooting
 
-**"Command not found: setup-project.sh"**
+### Command not found: setup-project.sh
+
 ```bash
 chmod +x ~/workspace/ai-coding-templates/scripts/setup-project.sh
 ```
 
-**"Project directory already exists"**
+### Project directory already exists
+
 ```bash
 # Use different project name or remove existing directory
 ./scripts/setup-project.sh --name different-name --tools all
 ```
 
-**"Can't find template files"**
+### Can't find template files
+
 ```bash
 # Make sure you're in the ai-coding-templates directory
 cd ~/workspace/ai-coding-templates

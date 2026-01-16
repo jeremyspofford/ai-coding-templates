@@ -51,15 +51,18 @@ pre-commit:
         echo "🔍 Scanning commit for secrets..."
         git secrets --pre_commit_hook -- "$@"
 
-    # Markdown linting - MD040 and MD060 enforcement
+    # Markdown linting - MD040 and MD060 enforcement with auto-fix
     markdown-lint:
       glob: "*.md"
       run: |
         if ! command -v markdownlint &> /dev/null; then
-          echo "ℹ  markdownlint not installed. Skipping detailed checks."
+          echo "ℹ️  markdownlint not installed. Skipping markdown linting."
           echo "   Install with: npm install -g markdownlint-cli"
           exit 0
         fi
+        echo "📝 Auto-fixing markdown issues..."
+        markdownlint --fix -c .markdownlint.json {staged_files} 2>/dev/null || true
+        # Re-run to check for unfixable issues
         markdownlint -c .markdownlint.json {staged_files}
       stage_fixed: true
 
