@@ -2,6 +2,13 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Task Tracking (Beads)
+
+This project uses **Beads (`bd`)** for task tracking and agent memory.
+- **ALWAYS** check `AGENTS.md` for the shared protocol.
+- **START** every session by running `bd ready`.
+- **TRACK** all work using `bd create` and `bd close`.
+
 ## Project Overview
 
 **AI Coding Templates** is a template generator for bootstrapping projects with unified AI coding assistant configurations. It provides standardized rules, workflows, and agent definitions for Claude Code (`.claude/`), Cursor (`.cursor/`), and Antigravity/Gemini (`.agent/`).

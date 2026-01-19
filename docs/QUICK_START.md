@@ -115,6 +115,17 @@ cp -r ~/workspace/ai-coding-templates/antigravity/project-config/.agent ./MY_PRO
 1. Review workflows in `workflows/`
 2. Customize rules in `rules/`
 
+## Beads Memory System
+
+All templates include [Beads](https://github.com/steveyegge/beads) integration for shared agent memory.
+
+- **Setup**: `scripts/setup-memory.sh` (run automatically)
+- **Protocol**: `AGENTS.md` (shared instructions)
+- **Usage**:
+  - `bd ready` - Find work
+  - `bd create` - Track tasks
+  - `bd close` - Complete work
+
 ## Next Steps
 
 After setup:

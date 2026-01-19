@@ -25,6 +25,12 @@ This file contains project-specific guidelines for Antigravity AI assistant.
 - TypeScript: No `any`, prefer `interface`
 - Markdown: All code blocks must have language tags (MD040)
 
+## Task Tracking
+
+- **Protocol**: See `AGENTS.md` for shard memory rules.
+- **Beads**: Use the `beads_manager` skill to interact with `bd`.
+- **Start**: Always run `bd ready` to start a turn.
+
 ## Available Workflows
 
 Trigger workflows using their defined trigger commands:

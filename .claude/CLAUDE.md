@@ -25,6 +25,13 @@ This file contains project-specific guidelines for Claude Code AI assistant.
 - TypeScript: No `any`, prefer `interface`
 - Markdown: All code blocks must have language tags (MD040)
 
+## Task Tracking
+
+This project uses **Beads (`bd`)** for persistent memory.
+- Run `bd ready` to find work.
+- Run `bd create` to add tasks.
+- See `AGENTS.md` for the full protocol.
+
 ## Secrets Management
 
 **CRITICAL**: Never commit secrets, API keys, credentials, or passwords to the repository.

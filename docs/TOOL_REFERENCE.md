@@ -13,6 +13,7 @@ Quick comparison of Claude Code, Cursor, and Antigravity.
 | **Editor Integration** | IDE plugin | Built-in editor | Command line |
 | **Global Config** | `~/.claude/` | `~/.cursor/` | `~/.agent/` |
 | **Git Integration** | Via plugins | Commands | Workflows |
+| **Memory System** | Beads (`bd`) | Beads (`bd`) | Beads (`bd`) |
 | **Best For** | Flexible coding | Fast iteration | Automation |
 
 ## Configuration Differences

@@ -56,8 +56,10 @@ When working within this specific repository:
 1. **Maintain Consistency**: If you update a rule in `.agent/rules/`, check if a corresponding rule needs to be updated in `.claude/rules/` or `.cursor/rules/`.
 2. **Respect Conventions**: Follow the existing Markdown formatting (headers, table spacing) exactly.
 3. **Use Scripts**: Prefer using `scripts/setup-project.sh` for creating test cases or examples of new project structures rather than doing it manually.
+4. **Use Beads**: Use `bd` (Beads) for all task tracking. Run `bd ready` to check for work.
 
 When *using* a project generated from this template:
 
 1. Read `.agent/AGENT.md` first to understand project-specific overrides.
 2. Follow the workflows defined in `.agent/workflows/`.
+3. **Manage Memory**: Use `bd` commands to manage shared memory and tasks.
